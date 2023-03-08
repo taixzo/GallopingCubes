@@ -1,7 +1,6 @@
 # Cube triangulation based on nevarek's marching cubes implementation for gdscript
 
 import math
-import time
 
 class Vector3:
 	def __init__(self, x, y, z):
@@ -427,8 +426,6 @@ def calculate_cell_triangles(cell_grid, isolevel):
 	return triangles_list
 	
 def generate_mesh(sdf, gallop, GRID_SIZE, SURFACE_ISOVALUE):
-	start = time.time()
-
 	# calculate mesh data
 	triangles = []
 	if gallop:
@@ -451,8 +448,6 @@ def generate_mesh(sdf, gallop, GRID_SIZE, SURFACE_ISOVALUE):
 					cell_grid = generate_cell(x, y, z, sdf)
 					new_triangles = calculate_cell_triangles(cell_grid, SURFACE_ISOVALUE)
 					triangles.extend(new_triangles)
-	end = time.time()
-	print("Time taken: ", end - start)
 	return triangles
 
 def march_cubes(sdf, GRID_SIZE=20, SURFACE_ISOVALUE=0):
