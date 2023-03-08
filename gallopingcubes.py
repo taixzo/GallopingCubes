@@ -350,8 +350,7 @@ def calculate_cell_edge_hash(cell_grid, isolevel):
 
 
 def calculate_vertices_from_edges(cell_grid, intersected_edges, isolevel):
-	intersected_vertices = []
-	intersected_vertices.resize(12)
+	intersected_vertices = [0,0,0,0,0,0,0,0,0,0,0,0]
 
 	if (intersected_edges & 1):
 		intersected_vertices[0] = vertex_interpolate(isolevel, cell_grid.vertex[0], cell_grid.vertex[1], cell_grid.value[0], cell_grid.value[1])
@@ -439,9 +438,9 @@ def generate_mesh(sdf, gallop, GRID_SIZE, SURFACE_ISOVALUE):
 				while z < GRID_SIZE:
 					dist = sdf(Vector3(x+0.5, y+0.5, z+0.5))
 					if abs(dist) < 1.7321: # sqrt(3), aka diagonal distance from a cube's center to a corner
-						cell_grid = generate_cell(x, y, z)
+						cell_grid = generate_cell(x, y, z, sdf)
 						new_triangles = calculate_cell_triangles(cell_grid, SURFACE_ISOVALUE)
-						triangles.append_array(new_triangles)
+						triangles.extend(new_triangles)
 						z += 1
 					else:
 						z += round(abs(dist))
@@ -449,9 +448,9 @@ def generate_mesh(sdf, gallop, GRID_SIZE, SURFACE_ISOVALUE):
 		for x in range(-GRID_SIZE, GRID_SIZE):
 			for y in range(-GRID_SIZE, GRID_SIZE):
 				for z in range(-GRID_SIZE, GRID_SIZE):
-					cell_grid = generate_cell(x, y, z)
+					cell_grid = generate_cell(x, y, z, sdf)
 					new_triangles = calculate_cell_triangles(cell_grid, SURFACE_ISOVALUE)
-					triangles.append_array(new_triangles)
+					triangles.extend(new_triangles)
 	end = time.time()
 	print("Time taken: ", end - start)
 	return triangles
