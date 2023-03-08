@@ -5,7 +5,7 @@ GRID_SIZE=40
 
 def sdf(v):
 	sphere = v.length() - GRID_SIZE
-	sphere2 = (v+Vector3(2,0,0)).length() - GRID_SIZE
+	sphere2 = (v+Vector3(GRID_SIZE/2,0,0)).length() - GRID_SIZE
 	return max(sphere, -sphere2)
 
 start = time.time()
