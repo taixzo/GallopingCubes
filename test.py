@@ -1,7 +1,7 @@
 import time
 from gallopingcubes import Vector3, march_cubes, gallop_cubes, export_to_stl
 
-GRID_SIZE=160
+GRID_SIZE=20
 
 def sdf(v):
 	sphere = v.length() - GRID_SIZE
@@ -19,12 +19,12 @@ end = time.time()
 print("Time taken for galloping cubes: ", end - start)
 
 
-# marched_stl = export_to_stl(galloped_triangles)
-# galloped_stl = export_to_stl(galloped_triangles)
+marched_stl = export_to_stl(galloped_triangles)
+galloped_stl = export_to_stl(galloped_triangles)
 
-# print("Writing files...", end="")
-# with open("marched.stl", "w") as outfile:
-#     outfile.write(marched_stl)
-# with open("galloped.stl", "w") as outfile:
-#     outfile.write(galloped_stl)
-# print ("Done!")
+print("Writing files...", end="")
+with open("marched.stl", "w") as outfile:
+    outfile.write(marched_stl)
+with open("galloped.stl", "w") as outfile:
+    outfile.write(galloped_stl)
+print ("Done!")
