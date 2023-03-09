@@ -8,10 +8,10 @@ def sdf(v):
 	sphere2 = (v+Vector3(GRID_SIZE/2,0,0)).length() - GRID_SIZE
 	return max(sphere, -sphere2)
 
-# start = time.time()
-# marched_triangles = march_cubes(sdf, GRID_SIZE)
-# end = time.time()
-# print("Time taken for marching cubes: ", end - start)
+start = time.time()
+marched_triangles = march_cubes(sdf, GRID_SIZE)
+end = time.time()
+print("Time taken for marching cubes: ", end - start)
 
 start = time.time()
 galloped_triangles = gallop_cubes(sdf, GRID_SIZE)
